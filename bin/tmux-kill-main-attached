@@ -1,3 +1,4 @@
 #!/bin/bash
 
-tmux kill-window \; kill-session
+# tmux kill-window \; kill-session
+tmux kill-window \;

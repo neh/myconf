@@ -241,13 +241,33 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-exit-and-kill-main-tmux-session () {
-  session=$(tmux display-message -p '#S')
-  if [[ "$DESKTOP_SESSION" = "i3-gnome" && -z $VCSH_DIRECTORY && "$session" =~ ^main-.* ]]; then
-    tmux-kill-main-attached
+exit-main-tmux-session () {
+  if [[ ! -z "$TMUX" ]]; then
+      windows=($(tmux list-windows -t main -F '#I'))
+      active_windows=($(for sess in $(tmux list-sessions -F '#S' | grep '^main-.*'); do tmux list-windows -t $sess -F '#{?window_active,#I,}'; done))
+      unique_active_windows=($(printf "%s\n" "${active_windows[@]}" | sort -u))
+      unique_inactive_windows=()
+      for window in $windows; do
+          seen=0
+          for active in $unique_active_windows; do
+              if [[ $active -eq $window ]]; then
+                  seen=1
+                  break
+              fi
+          done
+          if [[ $seen -eq 0 ]]; then
+              unique_inactive_windows+=$window
+          fi
+      done
+
+      if [[ $#unique_inactive_windows -gt 0 ]]; then
+        tmux select-window -t ${unique_inactive_windows[1]}
+      else
+        tmux detach
+      fi
   fi
 }
-zshexit_functions+=( exit-and-kill-main-tmux-session )
+zshexit_functions+=( exit-main-tmux-session )
 
 # }}}
 # Completions {{{ -------------------------------------------------------------
