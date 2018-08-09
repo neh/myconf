@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# notify-send -u low "autorandr restarting polybar"
+$HOME/bin/polybar.sh

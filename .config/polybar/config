@@ -1,0 +1,351 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #282828
+background-alt = #504945
+;foreground = ${xrdb:color7:#222}
+foreground = #ebdbb2
+foreground-alt = #8d7f75
+; foreground-alt = #7c6f64
+; foreground-alt = #d65d0e
+primary = #ffb52a
+secondary = #e60053
+alert = #fb4934
+caution = #fabd2f
+
+[bar/default]
+monitor = ${env:MONITOR:}
+; monitor = ${env:MONITOR:eDP-1}
+monitor-fallback =
+; monitor-fallback = eDP-1
+width = 100%
+height = 24
+;offset-x = 1%
+;offset-y = 1%
+; radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 2
+module-margin-right = 3
+
+font-0 = Noto Sans:size=11;1
+;font-1 = Font Awesome 5 Pro:size=10;1
+font-1 = Font Awesome 5 Pro Solid:size=11;1
+font-2 = Font Awesome 5 Brands:size=11;1
+;font-2 = Material Icons:size=12;4
+;font-3 = unifont:fontformat=truetype:size=12:antialias=false;0
+
+modules-left = i3 xwindow
+modules-center = 
+modules-right = eth wlan volume battery battery2 date
+
+tray-position = right
+tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+tray-maxsize = 16
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+[bar/primary-laptop]
+inherit = bar/default
+monitor = ${env:MONITOR:}
+monitor-fallback =
+modules-right = eth wlan backlight-acpi volume battery battery2 date
+
+[bar/secondary]
+inherit = bar/default
+monitor = ${env:MONITOR:}
+monitor-fallback =
+
+modules-left = i3 xwindow
+modules-center =
+modules-right =
+
+tray-position =
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:100:…%
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = false
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
+label-focused-underline = #fe8019
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-background = #3c3836
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-foreground = ${colors.background}
+label-visible-background = ${colors.foreground-alt}
+label-visible-underline = #fe8019
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.primary}
+label-urgent-foreground = ${colors.background}
+label-urgent-underline = #fe8019
+label-urgent-padding = 2
+
+[module/xbacklight]
+type = internal/xbacklight
+output = eDP-1
+exec-if = pgrep aosenuthoae
+
+; format-prefix = " "
+; format-prefix-foreground = ${colors.foreground-alt}
+format = <ramp> <label>
+label = %percentage%%
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+;ramp-6 = 
+;ramp-5 = 
+;ramp-4 = 
+;ramp-3 = 
+;ramp-2 = 
+;ramp-1 = 
+ramp-0 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #f90000
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = ${env:INTERFACE_WIRELESS:wlan0}
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid% %local_ip%
+
+; format-disconnected =
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.alert}
+; label-disconnected = %ifname%
+label-disconnected = 
+label-disconnected-foreground = ${colors.alert}
+
+ramp-signal-0 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+[module/eth]
+type = internal/network
+interface = ${env:INTERFACE_WIRED:eth0}
+interval = 3.0
+
+; format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %a %b %e"
+date-alt = " %Y-%m-%d"
+
+time = "%H:%M"
+time-alt = %H:%M:%S
+
+; format-prefix = 
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+; format-underline = #0a6cf5
+format-background = #3c3836
+format-padding = 2
+format-margin = 0
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-foreground = ${colors.foreground-alt}
+
+ramp-headphones-0 = 
+
+format-muted-foreground = ${colors.caution}
+label-muted = 
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 92
+
+time-format = "%-H:%M"
+
+format-charging = <animation-charging> <label-charging>
+format-charging-underline = #b8bb26
+label-charging = %time%
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = #fabd2f
+label-discharging = %time%
+
+; format-full-prefix = ""
+format-full-prefix-foreground = ${colors.foreground-alt}
+; format-full-underline = ${self.format-charging-underline}
+format-full =
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.alert}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.caution}
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+[module/battery2]
+inherit = module/battery
+battery = BAT1
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = l
+ramp-1 = m
+ramp-2 = h
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = P
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = false
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 0
+margin-bottom = 36
