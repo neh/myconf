@@ -139,11 +139,11 @@ label-urgent-padding = 2
 [module/xbacklight]
 type = internal/xbacklight
 output = eDP-1
-exec-if = pgrep aosenuthoae
+; exec-if = pgrep aosenuthoae
 
-; format-prefix = " "
-; format-prefix-foreground = ${colors.foreground-alt}
-format = <ramp> <label>
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format = <label>
 label = %percentage%%
 
 bar-width = 10
