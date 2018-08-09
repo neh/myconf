@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export GIT_DIR=$HOME/.myconf
+export GIT_WORK_TREE=$HOME
+
+exec emacs
