@@ -152,7 +152,7 @@ zle -N zle-line-init
 # }}}
 # Aliases {{{ -----------------------------------------------------------------
 
-alias myconf='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+alias myc='git --git-dir=$HOME/.myconf --work-tree=$HOME'
 
 alias lrt='ls -lrth'
 alias lart='ls -larth'
