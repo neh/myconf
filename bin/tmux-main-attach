@@ -1,0 +1,4 @@
+#!/bin/bash
+
+new_session_id=$(tmux new-session -d -P -F '#{session_name}' -t main)
+tmux rename-session -t $new_session_id main-$new_session_id \; set-hook after-pane-exited "run ~/bin/tmux-kill-main-attached" \; new-window \; attach
