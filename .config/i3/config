@@ -18,7 +18,6 @@
 font pango:Noto Sans 9
 
 set $terminal termite
-set $handy_cmd termite --role=handy -e  'sh -c "tmux attach -t handy || tmux new-session -s handy"'
 
 gaps inner 15
 gaps outer 0
@@ -93,10 +92,6 @@ bindsym Mod4+a focus parent
 
 # move the currently focused window to the scratchpad
 bindsym Mod4+Shift+o move scratchpad
-
-bindsym Mod4+Control+o exec $handy_cmd
-for_window [title="handy"] border pixel 2, move scratchpad, scratchpad show
-for_window [window_role="handy"] border pixel 2, move scratchpad, scratchpad show
 
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="bubble"] floating enable
