@@ -267,7 +267,7 @@ format-charging-underline = #b8bb26
 label-charging = %time%
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #fabd2f
+; format-discharging-underline = #fabd2f
 label-discharging = %time%
 
 ; format-full-prefix = ""
@@ -287,7 +287,7 @@ ramp-capacity-foreground = ${colors.foreground-alt}
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+animation-charging-framerate = 2000
 
 [module/battery2]
 inherit = module/battery
