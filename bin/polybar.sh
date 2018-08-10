@@ -19,11 +19,11 @@ for m in $(polybar --list-monitors | cut -d":" -f1); do
         # the --reload option doesn't seem to work under i3, but
         # doesn't hurt either
         if [[ "$m" == "$laptop_display" ]]; then
-            MONITOR=$m polybar --reload primary-laptop &
+            MONITOR=$m polybar primary-laptop &
         else
-            MONITOR=$m polybar --reload default &
+            MONITOR=$m polybar default &
         fi
     else
-        MONITOR=$m polybar --reload secondary &
+        MONITOR=$m polybar secondary &
     fi
 done
