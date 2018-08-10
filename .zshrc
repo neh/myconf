@@ -280,3 +280,5 @@ export FZF_DEFAULT_COMMAND='ag -l -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(direnv hook zsh)"
+
+eval "$(fasd --init auto)"
