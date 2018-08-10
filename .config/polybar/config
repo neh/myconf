@@ -162,10 +162,13 @@ ramp-load-2 =
 ramp-load-3 =
 ramp-load-4 =
 ramp-load-5 =
-ramp-load-6 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_CPU':}%{A}
-ramp-load-6-foreground = ${colors.caution}
+ramp-load-6 =
 ramp-load-7 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_CPU':}%{A}
-ramp-load-7-foreground = ${colors.alert}
+ramp-load-7-foreground = ${colors.caution}
+ramp-load-8 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_CPU':}%{A}
+ramp-load-8-foreground = ${colors.caution}
+ramp-load-9 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_CPU':}%{A}
+ramp-load-9-foreground = ${colors.alert}
 
 [module/memory]
 type = internal/memory
@@ -179,11 +182,13 @@ ramp-used-2 =
 ramp-used-3 =
 ramp-used-4 =
 ramp-used-5 =
-ramp-used-5-foreground = ${colors.caution}
-ramp-used-6 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_MEM':}%{A}
-ramp-used-6-foreground = ${colors.caution}
+ramp-used-6 =
 ramp-used-7 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_MEM':}%{A}
-ramp-used-7-foreground = ${colors.alert}
+ramp-used-7-foreground = ${colors.caution}
+ramp-used-8 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_MEM':}%{A}
+ramp-used-8-foreground = ${colors.caution}
+ramp-used-9 = %{A1:termite -e '/home/nathan/bin/tmux-main-attach htop --sort-key=PERCENT_MEM':}%{A}
+ramp-used-9-foreground = ${colors.alert}
 
 [module/wlan]
 type = internal/network
