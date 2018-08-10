@@ -5,4 +5,4 @@ if $(tmux has-session -t main); then
 else
     create_window=''
 fi
-tmux new-session -t main \; ${create_window} attach \; set-option destroy-unattached \; set-hook after-pane-exited kill-window \; set-hook before-client-detached kill-window \; set-hook -t main -g sessions-changed 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook -t main -g session-window-changed 'run-shell ~/bin/tmux-bg-status.sh'
+tmux new-session -t main \; ${create_window} attach \; set-option destroy-unattached \; set-hook client-detached kill-window \; set-hook sessions-changed 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-window-changed 'run-shell ~/bin/tmux-bg-status.sh'
