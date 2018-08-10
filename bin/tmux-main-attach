@@ -1,8 +1,12 @@
 #!/bin/bash
 
+create_window=''
 if $(tmux has-session -t main); then
-    create_window='new-window ; '
-else
-    create_window=''
+    # create_window="new-window $@ ; set-hook pane-exited kill-window ; set-hook pane-exited detach ;"
+    if [[ ! -z "$@" ]]; then
+        create_window="new-window $@ ; set-hook pane-exited detach ;"
+    else
+        create_window="new-window ;"
+    fi
 fi
-tmux new-session -t main \; ${create_window} attach \; set-option destroy-unattached on \; set-hook client-detached kill-window \; set-hook session-created 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-window-changed 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-closed 'run-shell ~/bin/tmux-bg-status.sh'
+tmux new-session -t main \; ${create_window} attach \; set-option destroy-unattached on \; set-hook session-created 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-window-changed 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-closed 'run-shell ~/bin/tmux-bg-status.sh'
