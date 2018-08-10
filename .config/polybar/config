@@ -57,7 +57,7 @@ font-3 = Material Icons:size=11;2
 
 modules-left = i3 xwindow
 modules-center = 
-modules-right = eth wlan volume battery battery2 memory cpu date
+modules-right = networkaccess eth wlan volume battery battery2 memory cpu date
 
 tray-position = right
 tray-padding = 2
@@ -80,7 +80,7 @@ tray-maxsize = 16
 inherit = bar/default
 monitor = ${env:MONITOR:}
 monitor-fallback =
-modules-right = eth wlan backlight-acpi volume battery battery2 memory cpu date
+modules-right = networkaccess eth wlan backlight-acpi volume battery battery2 memory cpu date
 
 [bar/secondary]
 inherit = bar/default
@@ -315,6 +315,12 @@ ramp-1 = m
 ramp-2 = h
 ramp-foreground = ${colors.foreground-alt}
 
+[module/networkaccess]
+type = custom/script
+exec = /home/nathan/bin/networkaccess.sh
+tail = true
+; label =
+click-left = kill -USR1 %pid%
 
 [settings]
 screenchange-reload = false
