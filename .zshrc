@@ -279,6 +279,8 @@ zshexit_functions+=( exit-main-tmux-session )
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(direnv hook zsh)"
-
 eval "$(fasd --init auto)"
+
+if type direnv > /dev/null; then
+    eval "$(direnv hook zsh)"
+fi
