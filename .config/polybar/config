@@ -52,12 +52,12 @@ font-0 = Noto Sans:size=11;1
 ;font-1 = Font Awesome 5 Pro:size=10;1
 font-1 = Font Awesome 5 Pro Solid:size=11;1
 font-2 = Font Awesome 5 Brands:size=11;1
-;font-2 = Material Icons:size=12;4
+font-3 = Material Icons:size=11;2
 ;font-3 = unifont:fontformat=truetype:size=12:antialias=false;0
 
 modules-left = i3 xwindow
 modules-center = 
-modules-right = eth wlan volume battery battery2 date
+modules-right = networkaccess eth wlan volume battery battery2 memory date
 
 tray-position = right
 tray-padding = 2
@@ -80,7 +80,7 @@ tray-maxsize = 16
 inherit = bar/default
 monitor = ${env:MONITOR:}
 monitor-fallback =
-modules-right = eth wlan backlight-acpi volume battery battery2 date
+modules-right = eth wlan backlight-acpi volume battery battery2 memory date
 
 [bar/secondary]
 inherit = bar/default
@@ -161,10 +161,20 @@ label = %percentage%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
 label = %percentage_used%%
+format = <ramp-used>
+
+ramp-used-0 =
+ramp-used-1 =
+ramp-used-2 =
+ramp-used-3 =
+ramp-used-4 =
+ramp-used-5 = ▆
+ramp-used-5-foreground = ${colors.caution}
+ramp-used-6 = ▇
+ramp-used-6-foreground = ${colors.caution}
+ramp-used-7 = █
+ramp-used-7-foreground = ${colors.alert}
 
 [module/wlan]
 type = internal/network
