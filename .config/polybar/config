@@ -139,32 +139,11 @@ label-urgent-padding = 2
 [module/xbacklight]
 type = internal/xbacklight
 output = eDP-1
-; exec-if = pgrep aosenuthoae
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
 label = %percentage%%
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-;ramp-6 = 
-;ramp-5 = 
-;ramp-4 = 
-;ramp-3 = 
-;ramp-2 = 
-;ramp-1 = 
-ramp-0 = 
-ramp-foreground = ${colors.foreground-alt}
 
 [module/backlight-acpi]
 inherit = module/xbacklight
