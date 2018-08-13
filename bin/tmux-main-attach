@@ -9,4 +9,4 @@ if $(tmux has-session -t main); then
         create_window="new-window ;"
     fi
 fi
-tmux new-session -t main \; ${create_window} attach \; set-option destroy-unattached on \; set-hook session-created 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-window-changed 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-closed 'run-shell ~/bin/tmux-bg-status.sh'
+tmux new-session -t main \; ${create_window} attach \; source ~/.config/tmux/main-session.conf \; set-option destroy-unattached on \; set-hook session-created 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-window-changed 'run-shell ~/bin/tmux-bg-status.sh' \; set-hook session-closed 'run-shell ~/bin/tmux-bg-status.sh'

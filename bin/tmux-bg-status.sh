@@ -1,15 +1,29 @@
 #!/bin/bash
 
+declare -a sessions
 declare -a windows
 declare -a active_windows
 
+sessions=($(tmux list-sessions -F '#S' | grep '^main.*'))
 windows=($(tmux list-windows -t main -F '#I'))
-active_windows=($(for sess in $(tmux list-sessions -F '#S' | grep '^main-.*'); do tmux list-windows -t $sess -F '#{?window_active,#I,}'; done))
+active_windows=($(for sess in ${sessions[@]}; do tmux list-windows -t $sess -F '#{?window_active,#I,}'; done))
 unique_active_windows=($(printf "%s\n" "${active_windows[@]}" | sort -u))
+echo ${sessions[*]}
+echo ${windows[*]}
+echo ${active_windows[*]}
+echo ${unique_active_windows[*]}
 
-tmux set-window-option -g -t main window-status-format "#{?#{m:* #I *, ${active_windows[*]} },,#I (#W)}"
 if [[ ${#unique_active_windows[@]} -lt ${#windows[@]} ]]; then
-    tmux set-option -t main -g status on
+    status_status='on'
 else
-    tmux set-option -t main -g status off
+    status_status='off'
 fi
+for sess in ${sessions[@]}; do
+    tmux set-window-option window-status-format "#{?#{m:* #I *, ${unique_active_windows[*]} },,#I (#W)}"
+    # tmux set-window-option window-status-format "#I (#W)"
+    tmux set-option -t $sess status ${status_status}
+done
+# if [[ ${#unique_active_windows[@]} -lt ${#windows[@]} ]]; then
+# else
+    # tmux set-option status off
+# fi
