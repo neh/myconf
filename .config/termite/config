@@ -8,7 +8,7 @@ font = mononoki 10
 foreground      = #ebdbb2
 foreground_bold = #ebdbb2
 cursor          = #ebdbb2
-background      = #000000
+background      = #282828
 
 # black
 color0  = #282828
